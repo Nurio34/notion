@@ -1,0 +1,12 @@
+.SideMenu_Aside:has(#OpenMenuCheckbox:checked) .SideMenu_Aside_Nav {
+  transform: translateX(0);
+}
+.SideMenu_Aside:has(#CloseMenuCheckbox:checked) .SideMenu_Aside_Nav {
+  transform: translateX(-100%);
+}
+
+@media (min-width: 768px) {
+  .SideMenu_Aside:has(#CloseMenuCheckbox:checked) .SideMenu_Aside_Nav {
+    transform: translateX(0);
+  }
+}

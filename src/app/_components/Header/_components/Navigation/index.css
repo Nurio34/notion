@@ -1,0 +1,7 @@
+.Icon {
+  transition: transform 0.3s;
+}
+
+.Navigation_Button:hover .Icon {
+  transform: rotate(180deg);
+}

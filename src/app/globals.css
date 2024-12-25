@@ -2,20 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer components {
+  .SideMenu_Aside_Nav {
+    @apply h-full absolute top-0 left-0 transition-all -translate-x-full py-[1vh] px-[2vw] rounded-tr-lg rounded-br-lg
+    md:static md:translate-x-0 md:py-0 md:px-0 md:rounded-tr-none md:rounded-br-none bg-gray-200;
   }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
