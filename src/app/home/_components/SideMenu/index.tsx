@@ -1,6 +1,6 @@
 import "./index.css";
-import Navigation from "./_components/Navigation";
-import OpenMenuCheckbox from "./_components/OpenMenuCheckbox";
+import Navigation from "./Navigation";
+import OpenMenuCheckbox from "./OpenMenuCheckbox";
 
 function SideMenu() {
   return (

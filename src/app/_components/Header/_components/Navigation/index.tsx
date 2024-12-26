@@ -19,7 +19,7 @@ function Navigation() {
             className="Navigation_Button flex items-center font-semibold py-1 px-3 rounded-md transition-all hover:bg-gray-200"
           >
             {item.name}
-            <span className="Icon">{item.icon}</span>
+            {item.icon && <span className="Icon">{item.icon}</span>}
           </button>
         </li>
       ))}

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 function NotionIcon({ className }: Readonly<{ className?: string }>) {
   return (
-    <Link href={"/"} className={className}>
+    <Link href={"/"} className={className} aria-label="go to homepage">
       <svg
         className="wordmark_wordmark__gPyj1"
         viewBox="0 0 105 30"

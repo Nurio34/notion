@@ -1,4 +1,10 @@
+import Header from "./Header";
+
 function Menu() {
-  return <div>Menu</div>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 }
 export default Menu;

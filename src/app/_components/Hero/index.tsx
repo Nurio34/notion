@@ -33,23 +33,28 @@ function Hero() {
           <h2>Trusted by teams at</h2>
           <ul className="flex items-center gap-[2vw] py-[2vh]">
             {trusted.map((src) => (
-              <figure key={src} className="relative w-24 h-10">
-                <Image fill src={src} alt="" />
-              </figure>
+              <li key={src}>
+                <figure className="relative w-24 h-10">
+                  <Image fill src={src} alt="" />
+                </figure>
+              </li>
             ))}
           </ul>
         </div>
       </section>
       <video
         width={640}
-        className=" self-center"
+        className="self-center"
         src="https://www.notion.com/front-static/pages/product/super-duper/hero/hero-illustration.mp4"
         autoPlay
         loop
         muted
-      ></video>
+      >
+        <track kind="captions" src="/" srcLang="en" label="English" default />
+      </video>
+
       <figure className="relative w-full h-[717px] col-span-full border-2 rounded-lg overflow-hidden">
-        <Image fill src={"/hero/Projects-V2.webp"} alt="" />
+        <Image fill src={"/hero/sites.webp"} alt="" priority />
       </figure>
     </main>
   );
