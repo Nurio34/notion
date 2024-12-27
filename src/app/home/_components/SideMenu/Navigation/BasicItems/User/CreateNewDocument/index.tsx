@@ -1,11 +1,10 @@
 import { createNewDocument } from "@/actions/createNewDocument";
 import SubmitButton from "./SubmitButton";
 
-function CreateNewDocument() {
+export default function CreateNewDocumentForm() {
   return (
     <form action={createNewDocument}>
       <SubmitButton />
     </form>
   );
 }
-export default CreateNewDocument;

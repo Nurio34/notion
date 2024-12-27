@@ -1,29 +1,20 @@
-import { getUserRooms } from "@/actions/getUserRooms";
+import getRoom from "@/actions/getRoom";
 import { currentUser } from "@clerk/nextjs/server";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
+import Document from "./Document";
 
-async function Page({
-  params,
-  searchParams,
-}: {
-  params: Promise<{ id: string }>;
-  searchParams: Promise<string>;
-}) {
+async function Page({ params }: { params: Promise<{ id: string }> }) {
   const user = await currentUser();
-
   if (!user) redirect("/");
+  const email = user.emailAddresses[0].emailAddress;
 
   const paramsConstant = await params;
-  const searchParamsConstant = await searchParams;
+  const id = paramsConstant.id;
 
-  const rooms = await getUserRooms();
+  const room = await getRoom(email, id);
 
-  const isValidParam = rooms.some((room) => room.roomId === paramsConstant.id);
+  if (!room) return redirect("/home");
 
-  if (!isValidParam) notFound();
-
-  console.log({ paramsConstant, searchParamsConstant });
-
-  return <div>Page</div>;
+  return <Document room={room} />;
 }
 export default Page;

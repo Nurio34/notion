@@ -1,44 +1,45 @@
 "use server";
 
 import { adminDb } from "@/firebase-admin";
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { Timestamp } from "firebase/firestore";
 
 export type RoomType = {
   id: string;
   userId: string;
   role: string;
-  createdAt: Date;
+  createdAt: string;
   roomId: string;
 };
 
-type DataType = {
+export type DataType = {
   userId: string;
   role: string;
-  createdAt: Date;
+  createdAt: Timestamp;
   roomId: string;
 };
 
-export async function getUserRooms(): Promise<RoomType[]> {
+export async function getRoomsOfOwner(email: string): Promise<RoomType[]> {
   try {
-    const user = await currentUser();
-    if (!user) return auth.protect() as never;
-
-    const userEmail = user.primaryEmailAddress!.emailAddress;
-
     const Users_Collection_Ref = adminDb.collection("users");
     const Rooms_Collection_Ref =
-      Users_Collection_Ref.doc(userEmail).collection("rooms");
+      Users_Collection_Ref.doc(email).collection("rooms");
 
-    const querySnapshot = await Rooms_Collection_Ref.get();
+    const querySnapshot = await Rooms_Collection_Ref.where(
+      "role",
+      "==",
+      "owner"
+    )
+      .orderBy("createdAt", "asc")
+      .get();
 
     const rooms: RoomType[] = [];
     querySnapshot.forEach((doc) => {
       const id = doc.id;
       const data = doc.data() as DataType;
-      const room = { id, ...data };
+      const createdAt = data.createdAt.toDate().toISOString();
+      const room = { id, ...data, createdAt };
       rooms.push(room);
     });
-    console.log(rooms);
 
     return rooms;
   } catch (error) {

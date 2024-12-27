@@ -2,7 +2,8 @@ function UserIcon({ firstLetter }: { firstLetter: string }) {
   return (
     <div
       style={{
-        padding: "4px",
+        paddingBlock: "4px",
+        paddingInline: "8px",
         lineHeight: 1,
         borderRadius: "5px",
         backgroundColor: "rgb(145,145,142)",

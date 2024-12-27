@@ -2,33 +2,34 @@
 
 import { adminDb } from "@/firebase-admin";
 import { currentUser } from "@clerk/nextjs/server";
-import { revalidatePath } from "next/cache";
 
-export async function createNewDocument(): Promise<void> {
+export async function createGettingStartedDocument() {
   try {
     const user = await currentUser();
 
-    const userEmail = user!.primaryEmailAddress!.emailAddress;
+    if (!user) throw new Error("User is not authenticated");
+
+    const userEmail = user.primaryEmailAddress!.emailAddress;
 
     const Documents_Collection_Ref = adminDb.collection("documents");
-    const docRef = await Documents_Collection_Ref.add({
-      title: "New Document",
+    const docId = "Getting-Started";
+
+    await Documents_Collection_Ref.doc(docId).set({
+      title: "Getting Started",
     });
 
     await adminDb
       .collection("users")
       .doc(userEmail)
       .collection("rooms")
-      .doc(docRef.id)
+      .doc(docId)
       .set({
         userId: userEmail,
         role: "owner",
         createdAt: new Date(),
-        roomId: docRef.id,
+        roomId: docId,
       });
-
-    revalidatePath("/home");
   } catch (error) {
-    console.log(error);
+    console.error("Error creating 'Getting Started' document:", error);
   }
 }

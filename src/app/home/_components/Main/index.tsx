@@ -1,10 +1,10 @@
 import Header from "./Header";
 
-function Menu() {
+async function Main() {
   return (
     <div>
       <Header />
     </div>
   );
 }
-export default Menu;
+export default Main;
