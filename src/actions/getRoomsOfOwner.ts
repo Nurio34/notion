@@ -18,7 +18,9 @@ export type DataType = {
   roomId: string;
 };
 
-export async function getRoomsOfOwner(email: string): Promise<RoomType[]> {
+export const getRoomsOfOwner = async (email: string): Promise<RoomType[]> => {
+  console.log("getRoomsOfOwner");
+
   try {
     const Users_Collection_Ref = adminDb.collection("users");
     const Rooms_Collection_Ref =
@@ -46,4 +48,4 @@ export async function getRoomsOfOwner(email: string): Promise<RoomType[]> {
     console.error("Error fetching user rooms:", error);
     return [];
   }
-}
+};

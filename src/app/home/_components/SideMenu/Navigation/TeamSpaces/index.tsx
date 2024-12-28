@@ -13,7 +13,7 @@ async function TeamSpaces({ user }: { user: User }) {
       style={{ scrollbarWidth: "none" }}
     >
       {rooms.map((room) => (
-        <Room key={room.roomId} room={room} />
+        <Room key={room.roomId} rooms={rooms} room={room} />
       ))}
     </ul>
   );

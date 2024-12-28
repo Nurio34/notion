@@ -2,9 +2,11 @@
 
 import { adminDb } from "@/firebase-admin";
 import { currentUser } from "@clerk/nextjs/server";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 export async function createNewDocument(): Promise<void> {
+  console.log("createNewDocument");
+
   try {
     const user = await currentUser();
 
@@ -27,7 +29,7 @@ export async function createNewDocument(): Promise<void> {
         roomId: docRef.id,
       });
 
-    revalidatePath("/home");
+    revalidateTag("roomsOfOwner");
   } catch (error) {
     console.log(error);
   }

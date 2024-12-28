@@ -2,8 +2,11 @@
 
 import { adminDb } from "@/firebase-admin";
 import { currentUser } from "@clerk/nextjs/server";
+import { revalidateTag } from "next/cache";
 
 export async function createGettingStartedDocument() {
+  console.log("createGettingStartedDocumentAction");
+
   try {
     const user = await currentUser();
 
@@ -29,6 +32,7 @@ export async function createGettingStartedDocument() {
         createdAt: new Date(),
         roomId: docId,
       });
+    revalidateTag("roomsOfOwner");
   } catch (error) {
     console.error("Error creating 'Getting Started' document:", error);
   }
